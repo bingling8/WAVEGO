@@ -214,6 +214,7 @@ static const char PROGMEM INDEX_HTML[] = R"rawliteral(
                     </tr>
                     <tr>
                         <td align="center"><button class="button button4" id="Rest" onclick="fetch(document.location.origin+'/control?var=funcMode&val=10&cmd=0');">Rest</button></td>
+                        <td align="center"><button class="button button4" id="Rest" onclick="fetch(document.location.origin+'/control?var=funcMode&val=11&cmd=0');">Pee</button></td>
                     <tr>
                         <td align="center"><button class="button button4" id="actionA" onclick="fetch(document.location.origin+'/control?var=funcMode&val=5&cmd=0');">ActionA</button></td>
                         <td align="center"><button class="button button4" id="actionB" onclick="fetch(document.location.origin+'/control?var=funcMode&val=6&cmd=0');">ActionB</button></td>

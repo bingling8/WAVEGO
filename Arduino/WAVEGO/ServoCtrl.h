@@ -1017,6 +1017,46 @@ void functionJump(){
   }
 }
 
+void functionPee(){
+  for(float i = 0; i<=1; i+=0.02){
+    singleLegCtrl(1,  WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT, WALK_HEIGHT_MIN-10, i), besselCtrl(WALK_EXTENDED_Z, 0, i));
+    singleLegCtrl(2,  -WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT, WALK_HEIGHT_MIN-10, i), WALK_EXTENDED_Z);
+
+    singleLegCtrl(3,  WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT, WALK_HEIGHT_MAX-10, i), besselCtrl(WALK_EXTENDED_Z, 1.5*WALK_EXTENDED_Z, i));
+    singleLegCtrl(4,  -WALK_EXTENDED_X,WALK_HEIGHT , besselCtrl(WALK_EXTENDED_Z, 7*WALK_EXTENDED_Z, i));
+
+    GoalPosAll();
+    delay(1);
+  }
+  delay(3000);
+
+  for(int shakeTimes = 0; shakeTimes < 2; shakeTimes++){
+    for(float i = 0; i<=1; i+=0.2){
+      singleLegCtrl(4, -WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT, WALK_HEIGHT-10, i), 7*WALK_EXTENDED_Z);
+
+      GoalPosAll();
+      delay(1);
+    }
+    for(float i = 0; i<=1; i+=0.2){
+      singleLegCtrl(4,  -WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT-10, WALK_HEIGHT, i),7*WALK_EXTENDED_Z);
+
+      GoalPosAll();
+      delay(1);
+    }
+  }
+  delay(1000);
+
+  for(float i = 0; i<=1; i+=0.02){
+    singleLegCtrl(1,  WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT_MIN-10, WALK_HEIGHT, i), besselCtrl(0, WALK_EXTENDED_Z, i));
+    singleLegCtrl(2,  -WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT_MIN-10, WALK_HEIGHT, i), WALK_EXTENDED_Z);
+
+    singleLegCtrl(3,  WALK_EXTENDED_X, besselCtrl(WALK_HEIGHT_MAX-10, WALK_HEIGHT, i), besselCtrl(1.5*WALK_EXTENDED_Z, WALK_EXTENDED_Z, i));
+    singleLegCtrl(4,  -WALK_EXTENDED_X, WALK_HEIGHT, besselCtrl(7*WALK_EXTENDED_Z, WALK_EXTENDED_Z, i));
+
+    GoalPosAll();
+    delay(1);
+  }
+}
 
 void functionActionA(){
   WALK_LIFT = 9;
@@ -1119,6 +1159,10 @@ void robotCtrl(){
     }else if(funcMode == 10){
       Serial.println("Rest");
       functionRest(); 
+      funcMode = 0;                  
+    }else if(funcMode == 11){
+      Serial.println("Pee");
+      functionPee(); 
       funcMode = 0;                  
     }
     setSingleLED(0,matrix.Color(0, 128, 255));
